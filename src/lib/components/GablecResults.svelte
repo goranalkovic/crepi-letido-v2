@@ -68,10 +68,10 @@
 		<h2
 			class="text-3xl font-semibold tracking-tight transition-colors scroll-m-20"
 		>
-			Nitko si još nikaj nije zel.
+			Nitko si još nikaj nije zel (ili pak nisu finalizirali).
 		</h2>
 
-		<Button href="/gableci/pick">Aaaajmo</Button>
+		<Button class="mt-12" href="/gableci/pick">Aaaajmo, biraj!</Button>
 	</div>
 {:else if $resturantData?.length > 0}
 	<div class="my-8">
