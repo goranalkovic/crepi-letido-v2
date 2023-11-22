@@ -1,6 +1,7 @@
 <script>
 	// @ts-nocheck
 	import { getContext, onMount } from "svelte";
+	import { get } from "svelte/store";
 
 	import {
 		AlertCircle,
