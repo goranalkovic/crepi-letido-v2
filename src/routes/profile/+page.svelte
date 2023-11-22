@@ -2,7 +2,6 @@
 	// @ts-nocheck
 	import { Input } from '$lib/components/ui/input';
 	import { Label } from '$lib/components/ui/label';
-	import * as RadioGroup from '$lib/components/ui/radio-group';
 	import * as Avatar from '$lib/components/ui/avatar';
 	import { Button } from '$lib/components/ui/button';
 	import { onMount } from 'svelte';
@@ -41,6 +40,11 @@
 		{ value: 'ext5', label: 'Gost 5' },
 	];
 </script>
+
+<svelte:head>
+	<title>Črepi letido | Profil</title>
+	<meta name="description" content="Namesti se da ti lepo bu" />
+</svelte:head>
 
 <div class="p-10 pt-32">
 	<div class="mt-8 mb-4">

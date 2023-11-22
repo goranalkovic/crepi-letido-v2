@@ -41,6 +41,11 @@
 	];
 </script>
 
+<svelte:head>
+	<title>Črepi letido | Dobrodošli</title>
+	<meta name="description" content="Best črepi you'll ever have!" />
+</svelte:head>
+
 <div class="container relative flex flex-col items-center justify-center h-screen overflow-hidden md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
 	<div
 		class="absolute inset-0 scale-125 bg-cover brightness-50 opacity-20 blur-sm grayscale lg:hidden -z-10"

@@ -11,6 +11,11 @@
 	$: ({ supabase } = data);
 </script>
 
+<svelte:head>
+	<title>Črepi letido | Gablec picker</title>
+	<meta name="description" content="Ima li gladnih?" />
+</svelte:head>
+
 <div class="p-10 pt-32">
 	<Tabs.Root value={$visibleTab}>
 		<Tabs.List>
