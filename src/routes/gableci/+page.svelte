@@ -27,8 +27,9 @@
 			<GablecPicker {supabase} />
 		</Tabs.Content>
 		<Tabs.Content value="overview">
-			<GablecResults />
+			<!-- <GablecResults /> -->
+			Debugging in progress
 		</Tabs.Content>
-		<Tabs.Content value="vote">Change your password here.</Tabs.Content>
+		<Tabs.Content value="vote">WIP</Tabs.Content>
 	</Tabs.Root>
 </div>

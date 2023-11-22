@@ -33,8 +33,8 @@
 
 		let currentRestaurantMeals = user?.selected?.[restaurantName];
 
-		console.log({restaurantName, mealIndex, included})
-		console.log({user, currentRestaurantMeals, restaurantName})
+		// console.log({restaurantName, mealIndex, included})
+		// console.log({user, currentRestaurantMeals, restaurantName})
 
 		if (!currentRestaurantMeals) {
 			await supabase
@@ -68,7 +68,7 @@
 			const newSelected = { ...user.selected };
 			delete newSelected[restaurantName];
 
-			console.log({newSelected});
+			// console.log({newSelected});
 			await supabase
 				.from('meal-selections')
 				.update({
