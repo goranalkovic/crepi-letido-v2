@@ -4,6 +4,10 @@
 	import { readable, get, writable } from 'svelte/store';
 	import { parse } from 'node-html-parser';
 
+	import { Button } from "$lib/components/ui/button";
+
+	import { page } from '$app/stores';
+
 	export let data;
 	$: ({ supabase, session } = data);
 
@@ -365,5 +369,10 @@
 	setContext('visibleTab', visibleTab);
 	setContext('mealSelectionData', mealSelectionData);
 </script>
+
+<div class="flex items-center gap-4 p-2 rounded border border-muted">
+	<Button disabled={$page.route.id === '/gableci/pick'} href="/gableci/pick">Pick-a-gablec</Button>
+	<Button disabled={$page.route.id === '/gableci'} href="/gableci">Svi odabiri</Button>
+</div>
 
 <slot />
