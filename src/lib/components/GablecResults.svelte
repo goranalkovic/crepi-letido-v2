@@ -26,7 +26,7 @@
 </script>
 
 {#if $resturantData?.length < 1}
-	<Alert.Root class="max-w-md">
+	<Alert.Root>
 		<AlertCircle class="w-4 h-4 stroke-red-600 dark:stroke-red-300" />
 		<Alert.Title class="font-semibold text-red-600 dark:text-red-300"
 			>Neki vrag je crkel</Alert.Title
@@ -96,7 +96,7 @@
 	</Alert.Root>
 
 	{#if $mealSelectionData?.currentUserData?.final}
-		<Alert.Root class="mt-4">
+		<Alert.Root class="mt-4 max-w-md">
 			<CheckCircle class="w-4 h-4 stroke-green-500" />
 			<Alert.Title>Odabir finaliziran</Alert.Title>
 			<Alert.Description>Lorem ipsum dolor sit amet</Alert.Description>
