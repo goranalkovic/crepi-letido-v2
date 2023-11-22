@@ -212,7 +212,8 @@
 				.from('meal-selections')
 				.select()
 				.eq('user', session?.user?.email)
-				.gte('created', `${currentDate} 00:00:00`).lte('created', `${currentDate} 23:59:59`)
+				.gte('created', `${currentDate} 00:00:00`)
+				.lte('created', `${currentDate} 23:59:59`)
 				.select()
 				.order('created')
 				.maybeSingle()
@@ -250,9 +251,15 @@
 		return () => supabase.removeChannel(channel);
 	});
 
-	const fetchResturantData = async () => {
+	const fetchResturantData = async (insert = true) => {
 		const { data: allRestaurants } = await supabase.from('restaurants').select().eq('custom', 'FALSE').select('*', { count: 'exact' });
-		const { data: initialData } = await supabase.from('meal-data').select().eq('valid', 'TRUE').gte('created', `${currentDate} 00:00:00`).lte('created', `${currentDate} 23:59:59`).select('id,created,meals,restaurant:restaurants(*)');
+		const { data: initialData } = await supabase
+			.from('meal-data')
+			.select()
+			.eq('valid', 'TRUE')
+			.gte('created', `${currentDate} 00:00:00`)
+			.lte('created', `${currentDate} 23:59:59`)
+			.select('id,created,meals,restaurant:restaurants(*)');
 		const { data: customRestaurantData } = await supabase.from('custom-meal-data').select('id,created,meals,restaurant:restaurants(*)');
 
 		// console.log({initialData});
@@ -268,10 +275,14 @@
 				console.error({ invalidRestaurants });
 			}
 
-			const { data: newRecords } = await supabase.from('meal-data').insert(fetchedMappedData).select();
+			if (insert) {
+				const { data: newRecords } = await supabase.from('meal-data').insert(fetchedMappedData).select();
 
-			if (Array.isArray(newRecords)) {
-				return [...newRecords, ...customRestaurantData];
+				if (Array.isArray(newRecords)) {
+					return [...newRecords, ...customRestaurantData];
+				}
+			} else {
+				return [...fetchedMappedData, ...customRestaurantData];
 			}
 		}
 
@@ -312,11 +323,7 @@
 	});
 
 	const processUserSelections = async () => {
-		const rawRestaurantData = get(resturantData);
-
-		if (!rawRestaurantData) {
-			return;
-		}
+		const rawRestaurantData = await fetchResturantData(false);
 
 		const selectionData = rawRestaurantData.reduce((prev, { restaurant: { slug }, meals }) => {
 			if (!meals) {
@@ -333,7 +340,9 @@
 			.from('meal-selections')
 			// .select()
 			// .eq("final", true)
-			.select().gte('created', `${currentDate} 00:00:00`).lte('created', `${currentDate} 23:59:59`)
+			.select()
+			.gte('created', `${currentDate} 00:00:00`)
+			.lte('created', `${currentDate} 23:59:59`)
 			.select('id,selected, user, userData:users(firstName,lastName,avatar)');
 
 		// console.log({ rawRestaurantData, userSelections, selectionData });
