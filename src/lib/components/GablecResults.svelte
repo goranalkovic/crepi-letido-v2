@@ -192,7 +192,7 @@
 								</div>
 
 								<div class="flex -space-x-4 hover:space-x-2">
-									<!-- {#each $mealSelectionData?.allSelectionData.selectionData[restaurant.slug][index] as em}
+									{#each $mealSelectionData?.allSelectionData.selectionData[restaurant.slug][index] as em}
 										{@const currentUser = $mealSelectionData?.allSelectionData.userData.find(({ email }) => email === em)}
 
 										<Tooltip.Root>
@@ -206,7 +206,7 @@
 												<p>{currentUser?.firstName} {currentUser?.lastName}</p>
 											</Tooltip.Content>
 										</Tooltip.Root>
-									{/each} -->
+									{/each}
 								</div>
 							</div>
 						{/each}
