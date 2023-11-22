@@ -23,12 +23,10 @@
 
 	const resturantData = getContext("resturantData");
 	const mealSelectionData = getContext("mealSelectionData");
-
-	$: console.log({rd: $resturantData, msd: $mealSelectionData});
 </script>
 
 {#if $resturantData?.length < 1}
-	<Alert.Root>
+	<Alert.Root class="max-w-md">
 		<AlertCircle class="w-4 h-4 stroke-red-600 dark:stroke-red-300" />
 		<Alert.Title class="font-semibold text-red-600 dark:text-red-300"
 			>Neki vrag je crkel</Alert.Title
@@ -74,7 +72,7 @@
 		</h2>
 	</div>
 
-	<Alert.Root class="shadow-md shadow-orange-400/10">
+	<Alert.Root class="shadow-md shadow-orange-400/10 max-w-md">
 		<AlertTriangle class="w-4 h-4 stroke-orange-400" />
 		<Alert.Title>Da ne bu kasnije <i>a kak nema</i></Alert.Title>
 		<Alert.Description
