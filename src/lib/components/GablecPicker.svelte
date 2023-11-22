@@ -28,6 +28,7 @@
 
 	import DialogClose from "./DialogClose.svelte";
 	import { redirect } from "@sveltejs/kit";
+    import { goto } from "$app/navigation";
 
 	let errorData;
 
@@ -132,7 +133,7 @@
 			})
 			.eq("id", user.id);
 
-		throw redirect(301, "/gableci");
+		goto('/gableci');
 	};
 
 	let tempNoteText = "";

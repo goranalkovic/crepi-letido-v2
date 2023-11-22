@@ -125,7 +125,7 @@
 							</Card.Title>
 						</div>
 
-						{#if $mealSelectionData?.allSelectionData.userData.length > 1 && $mealSelectionData?.allSelectionData?.selectionData?.[restaurant.slug].some((i) => i.length === $mealSelectionData?.allSelectionData.userData.length)}
+						{#if $mealSelectionData?.allSelectionData?.userData?.length > 1 && $mealSelectionData?.allSelectionData?.selectionData?.[restaurant?.slug].some((i) => i?.length === $mealSelectionData?.allSelectionData?.userData?.length)}
 							<div
 								class="flex items-center gap-2 p-2 ml-auto text-white rounded-md shadow bg-gradient-to-br from-green-700 to-green-800 animate-pulse dark:from-green-200 dark:to-green-300 dark:text-green-950"
 							>
