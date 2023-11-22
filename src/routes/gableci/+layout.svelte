@@ -305,12 +305,12 @@
 		const selectionData = rawRestaurantData.reduce((prev, { restaurant: { slug }, meals }) => {
 			return {
 				...prev,
-				[slug]: Array(meals.length).fill([]),
+				[slug]: meals?.length > 0 ? Array(meals.length).fill([]) : [],
 			};
 		}, {});
 
 
-		console.log({rawRestaurantData, selectionData});
+
 
 		const { data: userSelections } = await supabase.from('meal-selections').select().eq('final', true).select('id,selected, user, userData:users(firstName,lastName,avatar)');
 
