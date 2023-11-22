@@ -23,6 +23,8 @@
 
 	const resturantData = getContext("resturantData");
 	const mealSelectionData = getContext("mealSelectionData");
+
+	$: intersects = $mealSelectionData?.allSelectionData?.intersects;
 </script>
 
 {#if $resturantData?.length < 1}
@@ -87,16 +89,26 @@
 		</h2>
 	</div>
 
-	<Alert.Root class="shadow-md shadow-orange-400/10 max-w-md">
+
+	{#if intersects?.length < 1}
+		 <Alert.Root class="max-w-md shadow-md shadow-orange-400/10">
+		<AlertTriangle class="w-4 h-4 stroke-orange-400" />
+		<Alert.Title>Nema intersektija 🥲</Alert.Title>
+		<Alert.Description>Bude bolje zutra! #blameMajcen</Alert.Description
+		>
+	</Alert.Root>
+	{/if}
+
+	<!-- <Alert.Root class="max-w-md shadow-md shadow-orange-400/10">
 		<AlertTriangle class="w-4 h-4 stroke-orange-400" />
 		<Alert.Title>Da ne bu kasnije <i>a kak nema</i></Alert.Title>
 		<Alert.Description
 			>Vidljivi su samo odabiri ljudi koji su finalizirali narudžbu!</Alert.Description
 		>
-	</Alert.Root>
+	</Alert.Root> -->
 
 	{#if $mealSelectionData?.currentUserData?.final}
-		<Alert.Root class="mt-4 max-w-md">
+		<Alert.Root class="max-w-md mt-4">
 			<CheckCircle class="w-4 h-4 stroke-green-500" />
 			<Alert.Title>Odabir finaliziran</Alert.Title>
 			<Alert.Description>Lorem ipsum dolor sit amet</Alert.Description>
@@ -125,7 +137,7 @@
 							</Card.Title>
 						</div>
 
-						{#if $mealSelectionData?.allSelectionData?.userData?.length > 1 && $mealSelectionData?.allSelectionData?.selectionData?.[restaurant?.slug].some((i) => i?.length === $mealSelectionData?.allSelectionData?.userData?.length)}
+						{#if intersects?.includes(restaurant.slug)}
 							<div
 								class="flex items-center gap-2 p-2 ml-auto text-white rounded-md shadow bg-gradient-to-br from-green-700 to-green-800 animate-pulse dark:from-green-200 dark:to-green-300 dark:text-green-950"
 							>

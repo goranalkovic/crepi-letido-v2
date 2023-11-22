@@ -17,7 +17,7 @@
 
 <ModeWatcher />
 
-{#if $page.route.id.includes('/gableci')}
+{#if $page?.route?.id?.includes('/gableci')}
 	<div class="fixed top-0 left-0 right-0 z-10 h-32 bg-background/60 backdrop-saturate-200 backdrop-blur-xl"></div>
 {/if}
 
