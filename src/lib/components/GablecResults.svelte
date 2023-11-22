@@ -104,7 +104,7 @@
 	{/if}
 
 	<div class="flex flex-col gap-4 mt-6 max-w-7xl">
-		{#each [...$resturantData].filter((r) => !$mealSelectionData?.allSelectionData?.selectionData?.[r.restaurant.slug]?.every((i) => i?.length === 0)) as { meals, restaurant, id } (id)}
+		{#each [...$resturantData].filter((r) => !$mealSelectionData?.allSelectionData?.selectionData?.[r.restaurant.slug]?.every((sels) => sels?.length === 0)) as { meals, restaurant, id } (id)}
 			<Card.Root class="flex max-lg:flex-col lg:min-h-[14rem]">
 				<Card.Header
 					class="max-lg:border-b lg:border-r lg:w-1/3 border-border lg:justify-between shrink-0"
@@ -161,7 +161,7 @@
 				<Card.Content class="w-full pt-6">
 					<div class="flex flex-col gap-1">
 						{#each meals as { name, price, meta, isCustomItem, hasTopSeparator }, index (index + 1)}
-							{#if $mealSelectionData?.allSelectionData?.selectionData?.[restaurant?.slug]?.[i].length > 0}
+							{#if $mealSelectionData?.allSelectionData?.selectionData?.[restaurant?.slug]?.[index].length > 0}
 								{#if hasTopSeparator}
 									<Separator
 										class="-ml-6 w-[calc(100%_+_3rem)] my-6"
