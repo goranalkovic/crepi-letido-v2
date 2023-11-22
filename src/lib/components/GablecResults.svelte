@@ -58,6 +58,21 @@
 			</AlertDialog.Root>
 		</Alert.Description>
 	</Alert.Root>
+{:else if $mealSelectionData?.allSelectionData?.selectionData && Object.values($mealSelectionData?.allSelectionData?.selectionData).every((s) => s.length === 0)}
+	<div class="my-8">
+		<p
+			class="text-lg font-semibold tracking-tight scroll-m-20 text-muted-foreground"
+		>
+			Hmmm...
+		</p>
+		<h2
+			class="text-3xl font-semibold tracking-tight transition-colors scroll-m-20"
+		>
+			Nitko si još nikaj nije zel.
+		</h2>
+
+		<Button href="/gableci/pick">Aaaajmo</Button>
+	</div>
 {:else if $resturantData?.length > 0}
 	<div class="my-8">
 		<p
@@ -145,70 +160,98 @@
 
 				<Card.Content class="w-full pt-6">
 					<div class="flex flex-col gap-1">
-						{#each meals.filter((_, i) => $mealSelectionData?.allSelectionData?.selectionData?.[restaurant?.slug]?.[i].length > 0) as { name, price, meta, isCustomItem, hasTopSeparator }, index (index + 1)}
-							{#if hasTopSeparator}
-								<Separator
-									class="-ml-6 w-[calc(100%_+_3rem)] my-6"
-								/>
-							{/if}
+						{#each meals as { name, price, meta, isCustomItem, hasTopSeparator }, index (index + 1)}
+							{#if $mealSelectionData?.allSelectionData?.selectionData?.[restaurant?.slug]?.[i].length > 0}
+								{#if hasTopSeparator}
+									<Separator
+										class="-ml-6 w-[calc(100%_+_3rem)] my-6"
+									/>
+								{/if}
 
-							<div
-								class="flex items-center justify-between gap-4 p-4"
-							>
 								<div
-									class="grid gap-1.5 leading-none text-start justify-start shrink-0"
+									class="flex items-center justify-between gap-4 p-4"
 								>
-									<span
-										class="inline-flex items-center gap-2 text-sm font-medium"
+									<div
+										class="grid gap-1.5 leading-none text-start justify-start shrink-0"
 									>
-										{#if isCustomItem}
-											{@html name}
-										{:else}
-											{name}
-										{/if}
-
-										{#if meta?.isVegetarian}
-											<Tooltip.Root>
-												<Tooltip.Trigger
-													><LeafyGreen
-														class="w-3 h-3 mr-1 stroke-green-600 dark:stroke-green-400"
-													/></Tooltip.Trigger
-												>
-												<Tooltip.Content>
-													<p>Vege-friendly jelo</p>
-												</Tooltip.Content>
-											</Tooltip.Root>
-										{/if}
-									</span>
-									{#if price}
-										<p
-											class="text-sm text-muted-foreground"
+										<span
+											class="inline-flex items-center gap-2 text-sm font-medium"
 										>
-											{price}
-										</p>
-									{/if}
-								</div>
+											{#if isCustomItem}
+												{@html name}
+											{:else}
+												{name}
+											{/if}
 
-								<div class="flex -space-x-4 hover:space-x-2">
-									{#each ($mealSelectionData?.allSelectionData?.selectionData?.[restaurant?.slug]?.[index] ?? []) as em}
-										{#if em}
-											{@const currentUser = $mealSelectionData?.allSelectionData.userData.find(({ email }) => email === em)}
-
-											<Tooltip.Root>
-												<Tooltip.Trigger class="transition-[margin]">
-													<Avatar.Root>
-														<Avatar.Image src="/profile-pictures/{currentUser.avatar}.jpg" alt="{currentUser.firstName ?? ''} {currentUser.lastName ?? ''}" />
-														<Avatar.Fallback>{currentUser.firstName?.charAt(0) ?? '-'}{currentUser.lastName?.charAt(0) ?? '-'}</Avatar.Fallback>
-													</Avatar.Root>
-												</Tooltip.Trigger>
-												<Tooltip.Content>
-													<p>{currentUser?.firstName} {currentUser?.lastName}</p>
-												</Tooltip.Content>
-											</Tooltip.Root>
+											{#if meta?.isVegetarian}
+												<Tooltip.Root>
+													<Tooltip.Trigger
+														><LeafyGreen
+															class="w-3 h-3 mr-1 stroke-green-600 dark:stroke-green-400"
+														/></Tooltip.Trigger
+													>
+													<Tooltip.Content>
+														<p>
+															Vege-friendly jelo
+														</p>
+													</Tooltip.Content>
+												</Tooltip.Root>
+											{/if}
+										</span>
+										{#if price}
+											<p
+												class="text-sm text-muted-foreground"
+											>
+												{price}
+											</p>
 										{/if}
-									{/each}
+									</div>
+
+									<div
+										class="flex -space-x-4 hover:space-x-2"
+									>
+										{#each $mealSelectionData?.allSelectionData?.selectionData?.[restaurant?.slug]?.[index] ?? [] as em}
+											{#if em}
+												{@const currentUser =
+													$mealSelectionData?.allSelectionData.userData.find(
+														({ email }) =>
+															email === em,
+													)}
+
+												<Tooltip.Root>
+													<Tooltip.Trigger
+														class="transition-[margin]"
+													>
+														<Avatar.Root>
+															<Avatar.Image
+																src="/profile-pictures/{currentUser.avatar}.jpg"
+																alt="{currentUser.firstName ??
+																	''} {currentUser.lastName ??
+																	''}"
+															/>
+															<Avatar.Fallback
+																>{currentUser.firstName?.charAt(
+																	0,
+																) ??
+																	"-"}{currentUser.lastName?.charAt(
+																	0,
+																) ??
+																	"-"}</Avatar.Fallback
+															>
+														</Avatar.Root>
+													</Tooltip.Trigger>
+													<Tooltip.Content>
+														<p>
+															{currentUser?.firstName}
+															{currentUser?.lastName}
+														</p>
+													</Tooltip.Content>
+												</Tooltip.Root>
+											{/if}
+										{/each}
+									</div>
 								</div>
-							</div>
+							{/if}
 						{/each}
 					</div>
 				</Card.Content>
