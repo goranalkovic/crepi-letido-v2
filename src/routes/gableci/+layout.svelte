@@ -244,11 +244,11 @@
 	});
 
 	const fetchResturantData = async () => {
+		const { data: allRestaurants } = await supabase.from('restaurants').select().eq('custom', 'FALSE').select('*', { count: 'exact' });
 		const { data: initialData } = await supabase.from('meal-data').select().eq('valid', 'TRUE').select('id,created,meals,restaurant:restaurants(*)');
+		const { data: customRestaurantData } = await supabase.from('custom-meal-data').select('id,created,meals,restaurant:restaurants(*)');
 
-		const { data: allRestaurants } = await supabase.from('restaurants').select('*', { count: 'exact' });
-
-		if (initialData.length < allRestaurants?.length) {
+		if (initialData?.length < allRestaurants?.length) {
 			const fetchedMappedData = await getGablecData();
 
 			const validRestaurants = fetchedMappedData.filter(({ restaurant }) => allRestaurants.find(({ slug }) => slug === restaurant));
@@ -262,11 +262,11 @@
 			const { data: newRecords } = await supabase.from('meal-data').insert(fetchedMappedData).select();
 
 			if (Array.isArray(newRecords)) {
-				return [...initialData, ...newRecords];
+				return [...newRecords, ...customRestaurantData];
 			}
 		}
 
-		return initialData;
+		return [...initialData, ...customRestaurantData];
 	};
 
 	const resturantData = readable(null, (set) => {
@@ -303,7 +303,7 @@
 	});
 
 	const processUserSelections = async () => {
-		const rawRestaurantData = await fetchResturantData();
+		const rawRestaurantData = get(resturantData);
 
 		if (!rawRestaurantData) {
 			return;
