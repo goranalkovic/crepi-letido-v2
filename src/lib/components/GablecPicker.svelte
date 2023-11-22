@@ -23,10 +23,15 @@
 	let errorData;
 
 	const resturantData = getContext('resturantData');
-	const visibleTab = getContext('visibleTab');
 	const mealSelectionData = getContext('mealSelectionData');
 
 	export let supabase;
+
+	const date = new Date();
+	const currentYear = date.getFullYear();
+	const currentDay = date.getDate().toString().padStart(2, '0');
+	const currentMonth = (date.getMonth() + 1).toString().padStart(2, '0');
+	const currentDate = `${currentYear}-${currentMonth}-${currentDay}`;
 
 	const handleMealSelect = async (restaurantName, mealIndex, included = false) => {
 		const user = get(mealSelectionData).currentUserData;
@@ -45,7 +50,8 @@
 						[restaurantName]: [{ meal: mealIndex }],
 					},
 				})
-				.eq('id', user.id);
+				.eq('id', user.id)
+				.gte('created', `${currentDate} 00:00:00`).lte('created', `${currentDate} 23:59:59`);
 			return;
 		}
 
@@ -74,7 +80,8 @@
 				.update({
 					selected: newSelected,
 				})
-				.eq('id', user.id);
+				.eq('id', user.id)
+				.gte('created', `${currentDate} 00:00:00`).lte('created', `${currentDate} 23:59:59`);
 		} else {
 			await supabase
 				.from('meal-selections')
@@ -84,7 +91,8 @@
 						[restaurantName]: currentRestaurantMeals,
 					},
 				})
-				.eq('id', user.id);
+				.eq('id', user.id)
+				.gte('created', `${currentDate} 00:00:00`).lte('created', `${currentDate} 23:59:59`);
 		}
 	};
 
@@ -102,7 +110,8 @@
 					[restaurantName]: currentRestaurantMeals,
 				},
 			})
-			.eq('id', user.id);
+			.eq('id', user.id)
+			.gte('created', `${currentDate} 00:00:00`).lte('created', `${currentDate} 23:59:59`);
 	};
 
 	const handlePickFinalize = async () => {
@@ -113,7 +122,8 @@
 			.update({
 				final: true,
 			})
-			.eq('id', user.id);
+			.eq('id', user.id)
+			.gte('created', `${currentDate} 00:00:00`).lte('created', `${currentDate} 23:59:59`);
 
 		goto('/gableci');
 	};

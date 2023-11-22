@@ -11,6 +11,12 @@
 	export let data;
 	$: ({ supabase, session } = data);
 
+	const date = new Date();
+	const currentYear = date.getFullYear();
+	const currentDay = date.getDate().toString().padStart(2, '0');
+	const currentMonth = (date.getMonth() + 1).toString().padStart(2, '0');
+	const currentDate = `${currentYear}-${currentMonth}-${currentDay}`;
+
 	const getGablecData = async () => {
 		// Fetch gableci
 		const url = 'https://gableci.hr/vz/';
@@ -206,6 +212,7 @@
 				.from('meal-selections')
 				.select()
 				.eq('user', session?.user?.email)
+				.gte('created', `${currentDate} 00:00:00`).lte('created', `${currentDate} 23:59:59`)
 				.select()
 				.order('created')
 				.maybeSingle()
@@ -245,8 +252,10 @@
 
 	const fetchResturantData = async () => {
 		const { data: allRestaurants } = await supabase.from('restaurants').select().eq('custom', 'FALSE').select('*', { count: 'exact' });
-		const { data: initialData } = await supabase.from('meal-data').select().eq('valid', 'TRUE').select('id,created,meals,restaurant:restaurants(*)');
+		const { data: initialData } = await supabase.from('meal-data').select().eq('valid', 'TRUE').gte('created', `${currentDate} 00:00:00`).lte('created', `${currentDate} 23:59:59`).select('id,created,meals,restaurant:restaurants(*)');
 		const { data: customRestaurantData } = await supabase.from('custom-meal-data').select('id,created,meals,restaurant:restaurants(*)');
+
+		// console.log({initialData});
 
 		if (initialData?.length < allRestaurants?.length) {
 			const fetchedMappedData = await getGablecData();
@@ -324,6 +333,7 @@
 			.from('meal-selections')
 			// .select()
 			// .eq("final", true)
+			.select().gte('created', `${currentDate} 00:00:00`).lte('created', `${currentDate} 23:59:59`)
 			.select('id,selected, user, userData:users(firstName,lastName,avatar)');
 
 		// console.log({ rawRestaurantData, userSelections, selectionData });
@@ -372,10 +382,7 @@
 		};
 	};
 
-	const visibleTab = writable('pick');
-
 	setContext('resturantData', resturantData);
-	setContext('visibleTab', visibleTab);
 	setContext('mealSelectionData', mealSelectionData);
 </script>
 
