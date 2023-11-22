@@ -447,7 +447,7 @@
 </script>
 
 <div class="p-10 pt-32">
-	<div class="flex items-center gap-4 p-2 rounded border border-muted">
+	<div class="flex items-center gap-4 p-2 rounded-lg border border-muted w-fit">
 		<Button
 			disabled={$page.route.id === "/gableci/pick"}
 			variant={$page.route.id === "/gableci/pick" ? 'default' : 'outline'}

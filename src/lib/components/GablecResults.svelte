@@ -24,11 +24,9 @@
 	const resturantData = getContext("resturantData");
 	const mealSelectionData = getContext("mealSelectionData");
 
-	onMount(() => {
-		console.log({
-			restaurantData: get(resturantData),
-			mealSel: get(mealSelectionData),
-		});
+	console.log({
+		restaurantData: get(resturantData),
+		mealSel: get(mealSelectionData),
 	});
 </script>
 
