@@ -192,20 +192,22 @@
 								</div>
 
 								<div class="flex -space-x-4 hover:space-x-2">
-									{#each $mealSelectionData?.allSelectionData.selectionData[restaurant.slug][index] as em}
-										{@const currentUser = $mealSelectionData?.allSelectionData.userData.find(({ email }) => email === em)}
+									{#each ($mealSelectionData?.allSelectionData?.selectionData?.[restaurant?.slug]?.[index] ?? []) as em}
+										{#if em}
+											{@const currentUser = $mealSelectionData?.allSelectionData.userData.find(({ email }) => email === em)}
 
-										<Tooltip.Root>
-											<Tooltip.Trigger class="transition-[margin]">
-												<Avatar.Root>
-													<Avatar.Image src="/profile-pictures/{currentUser.avatar}.jpg" alt="{currentUser.firstName ?? ''} {currentUser.lastName ?? ''}" />
-													<Avatar.Fallback>{currentUser.firstName?.charAt(0) ?? '-'}{currentUser.lastName?.charAt(0) ?? '-'}</Avatar.Fallback>
-												</Avatar.Root>
-											</Tooltip.Trigger>
-											<Tooltip.Content>
-												<p>{currentUser?.firstName} {currentUser?.lastName}</p>
-											</Tooltip.Content>
-										</Tooltip.Root>
+											<Tooltip.Root>
+												<Tooltip.Trigger class="transition-[margin]">
+													<Avatar.Root>
+														<Avatar.Image src="/profile-pictures/{currentUser.avatar}.jpg" alt="{currentUser.firstName ?? ''} {currentUser.lastName ?? ''}" />
+														<Avatar.Fallback>{currentUser.firstName?.charAt(0) ?? '-'}{currentUser.lastName?.charAt(0) ?? '-'}</Avatar.Fallback>
+													</Avatar.Root>
+												</Tooltip.Trigger>
+												<Tooltip.Content>
+													<p>{currentUser?.firstName} {currentUser?.lastName}</p>
+												</Tooltip.Content>
+											</Tooltip.Root>
+										{/if}
 									{/each}
 								</div>
 							</div>
