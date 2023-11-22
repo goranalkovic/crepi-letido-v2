@@ -145,7 +145,7 @@
 
 				<Card.Content class="w-full pt-6">
 					<div class="flex flex-col gap-1">
-						{#each meals as { name, price, meta, isCustomItem, hasTopSeparator }, index (index + 1)}
+						{#each meals.filter((_, i) => $mealSelectionData?.allSelectionData?.selectionData?.[restaurant?.slug]?.[i].length > 0) as { name, price, meta, isCustomItem, hasTopSeparator }, index (index + 1)}
 							{#if hasTopSeparator}
 								<Separator
 									class="-ml-6 w-[calc(100%_+_3rem)] my-6"
