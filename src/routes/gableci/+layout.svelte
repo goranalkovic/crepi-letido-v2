@@ -303,9 +303,13 @@
 		}
 
 		const selectionData = rawRestaurantData.reduce((prev, { restaurant: { slug }, meals }) => {
+			if (!meals) {
+				return prev;
+			}
+
 			return {
 				...prev,
-				[slug]: meals?.length > 0 ? Array(meals.length).fill([]) : [],
+				[slug]: Array.isArray(meals) ? meals.map(() => []) : [],
 			};
 		}, {});
 
