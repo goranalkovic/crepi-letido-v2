@@ -16,6 +16,5 @@
 	<meta name="description" content="Ima li gladnih?" />
 </svelte:head>
 
-<div class="p-10 pt-32">
-	<GablecPicker {supabase} />
-</div>
+<GablecPicker {supabase} />
+
