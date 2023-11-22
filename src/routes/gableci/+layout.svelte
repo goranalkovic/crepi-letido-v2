@@ -234,6 +234,7 @@
 
 	const mealSelectionData = readable(null, (set) => {
 		processUserSelections().then((allSelectionData) => {
+			console.log({allSelectionData});
 			supabase
 				.from("meal-selections")
 				.select()
@@ -387,7 +388,7 @@
 				"id,selected, user, userData:users(firstName,lastName,avatar)",
 			);
 
-		console.log({ rawRestaurantData, userSelections, selectionData });
+		// console.log({ rawRestaurantData, userSelections, selectionData });
 
 		const refinedUserSelections = Object.entries(selectionData).reduce(
 			(prev, [restaurantName, restaurantMeals]) => {
