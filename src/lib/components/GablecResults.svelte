@@ -15,7 +15,6 @@
 	let errorData;
 
 	const resturantData = getContext('resturantData');
-	const userMealSelections = getContext('userMealSelections');
 	const mealSelectionData = getContext('mealSelectionData');
 </script>
 
@@ -55,7 +54,7 @@
 		<Alert.Description>Vidljivi su samo odabiri ljudi koji su finalizirali narudžbu!</Alert.Description>
 	</Alert.Root>
 
-	{#if $userMealSelections?.final}
+	{#if $mealSelectionData?.currentUserData?.final}
 		<Alert.Root class="mt-4">
 			<CheckCircle class="w-4 h-4 stroke-green-500" />
 			<Alert.Title>Odabir finaliziran</Alert.Title>

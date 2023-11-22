@@ -17,14 +17,14 @@
 
 <ModeWatcher />
 
-{#if $page.route.id === '/gableci'}
+{#if $page.route.id.contains('/gableci')}
 	<div class="fixed top-0 left-0 right-0 z-10 h-32 bg-background/60 backdrop-saturate-200 backdrop-blur-xl"></div>
 {/if}
 
 <a href="/" class="fixed z-20 flex items-center h-10 gap-2 text-lg font-medium left-10 top-10 {$page.route.id === '/' ? 'text-white' : 'text-muted-foreground'}">
 	Črepi letido
 
-	{#if $page.route.id === '/gableci'}
+	{#if $page.route.id.contains('/gableci')}
 		<span class="inline-flex items-center gap-1 font-semibold text-foreground">GablecPicker <Badge variant="secondary">Beta</Badge></span>
 	{/if}
 	{#if $page.route.id === '/crep-storm'}
