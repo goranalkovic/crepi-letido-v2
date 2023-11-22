@@ -7,24 +7,27 @@
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
 
 	export let user;
-
 </script>
 
 <DropdownMenu.Root positioning={{ placement: 'bottom-end' }}>
 	<DropdownMenu.Trigger asChild let:builder>
 		<Button builders={[builder]} variant="outline" size="icon" class="rounded-full">
-			<Avatar.Root class="w-9 h-9">
+			<Avatar.Root class="w-10 h-10 border border-border">
 				<Avatar.Image src="/profile-pictures/{user?.avatar ?? 'fallback'}.jpg" alt="{user?.firstName ?? ''} {user?.lastName ?? ''}" />
 				<Avatar.Fallback>{user?.firstName?.charAt(0) ?? '-'}{user?.lastName?.charAt(0) ?? '-'}</Avatar.Fallback>
 			</Avatar.Root>
 		</Button>
 	</DropdownMenu.Trigger>
 	<DropdownMenu.Content class="w-56">
-		<DropdownMenu.Label>{user.email}</DropdownMenu.Label>
+		<DropdownMenu.Label>
+			{user?.firstName ?? ''}
+			{user?.lastName ?? ''} <br />
+			<span class="font-normal text-muted-foreground">{user.email}</span>
+		</DropdownMenu.Label>
 		<DropdownMenu.Separator />
 		<DropdownMenu.Item href="/profile">
 			<User class="w-4 h-4 mr-2" />
-			<span>Profile</span>
+			<span>Edit profile</span>
 		</DropdownMenu.Item>
 		<DropdownMenu.Separator />
 		<DropdownMenu.Item href="/api/auth/logout">
