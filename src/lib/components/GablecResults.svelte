@@ -58,7 +58,7 @@
 			</AlertDialog.Root>
 		</Alert.Description>
 	</Alert.Root>
-{:else if $mealSelectionData?.allSelectionData?.selectionData && Object.values($mealSelectionData?.allSelectionData?.selectionData).every((s) => s.length === 0)}
+{:else if $mealSelectionData?.allSelectionData?.selectionData && Object.values($mealSelectionData?.allSelectionData?.selectionData).every((s) => s.every((j) => j.length === 0))}
 	<div class="my-8">
 		<p
 			class="text-lg font-semibold tracking-tight scroll-m-20 text-muted-foreground"
