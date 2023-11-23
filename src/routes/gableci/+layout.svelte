@@ -91,6 +91,8 @@
 
 			const validRestaurants = fetchedMappedData.filter(({ restaurant }) => allRestaurants.find(({ slug }) => slug === restaurant));
 
+			console.log({validRestaurants, fetchedMappedData});
+
 			if (validRestaurants.length < fetchedMappedData.length) {
 				const invalidRestaurants = fetchedMappedData.filter((item) => !validRestaurants.includes(item));
 
