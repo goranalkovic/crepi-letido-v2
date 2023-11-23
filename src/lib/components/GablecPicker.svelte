@@ -14,6 +14,7 @@
 		LeafyGreen,
 		ChefHat,
 		CheckCircle,
+		ExternalLink,
 	} from "lucide-svelte";
 	import * as Alert from "$lib/components/ui/alert";
 	import * as AlertDialog from "$lib/components/ui/alert-dialog";
@@ -262,7 +263,7 @@
 						>
 							{restaurant.name}
 						</h2>
-						{#if restaurant.phone || restaurant.delivery}
+						{#if restaurant.phone || restaurant.delivery || (restaurant?.url?.length > 0 && restaurant?.urlType === "menu")}
 							<div
 								class="flex justify-center gap-1 mt-3 text-sm text-muted-foreground"
 							>
@@ -283,19 +284,19 @@
 										{restaurant.delivery}
 									</div>
 								{/if}
-							</div>
-						{/if}
-						{#if restaurant?.url?.length > 0 && restaurant?.urlType === "menu"}
-							<div
-								class="flex justify-center gap-1 mt-3 text-sm text-muted-foreground"
-							>
-								<a
-									href={restaurant?.url}
-									class="px-1.5 py-0.5 bg-background rounded border border-muted shadow-sm text-muted-foreground flex items-center gap-1"
-								>
-									<ChefHat class="w-5 h-5 opacity-40" />
-									Meni
-								</a>
+
+								{#if restaurant?.url?.length > 0 && restaurant?.urlType === "menu"}
+									<a
+										href={restaurant?.url}
+										class="px-1.5 py-0.5 bg-background rounded border border-muted shadow-sm text-muted-foreground flex items-center gap-1 group"
+									>
+										<ChefHat
+											class="w-5 h-5 opacity-40 transition-colors group-hover:stroke-blue-500 dark:group-hover:stroke-cyan-300"
+										/>
+										Meni
+										<ExternalLink class="w-3 h-3 opacity-20" />
+									</a>
+								{/if}
 							</div>
 						{/if}
 					</div>
