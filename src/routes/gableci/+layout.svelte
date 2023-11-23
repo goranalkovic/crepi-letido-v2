@@ -63,12 +63,24 @@
 					processUserSelections().then((data) => {
 						console.log({newRecord});
 
-						const curr = get(mealSelectionData);
+						
 
-						set({
-							currentUserData: newRecord,
-							allSelectionData: data,
-						})
+						if (newRecord?.user === session?.user?.email) {
+							set({
+								currentUserData: newRecord,
+								allSelectionData: data,
+							})
+						} else {
+							const curr = get(mealSelectionData);
+
+							console.log({curr});
+
+							set({
+								currentUserData: newRecord,
+								allSelectionData: data,
+							})
+						}
+
 					}
 					);
 				}
