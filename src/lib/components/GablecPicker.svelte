@@ -294,7 +294,7 @@
 											class="w-5 h-5 opacity-40 transition-colors group-hover:stroke-blue-500 dark:group-hover:stroke-cyan-300"
 										/>
 										Meni
-										<ExternalLink class="w-3 h-3 opacity-20" />
+										<ExternalLink class="w-3.5 h-3.5 opacity-25" />
 									</a>
 								{/if}
 							</div>
