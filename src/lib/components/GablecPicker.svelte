@@ -278,7 +278,7 @@
 
 								{#if restaurant.delivery}
 									<div
-										class="px-1.5 py-0.5 bg-background rounded border border-muted shadow-sm text-muted-foreground flex items-center gap-1"
+										class="px-1.5 py-0.5 bg-background rounded border border-muted shadow-sm text-muted-foreground flex items-center gap-1 select-none"
 									>
 										<Truck class="w-5 h-5 opacity-40" />
 										{restaurant.delivery}
@@ -288,7 +288,7 @@
 								{#if restaurant?.url?.length > 0 && restaurant?.urlType === "menu"}
 									<a
 										href={restaurant?.url}
-										class="px-1.5 py-0.5 bg-background rounded border border-muted shadow-sm text-muted-foreground flex items-center gap-1 group"
+										class="px-1.5 py-0.5 bg-background rounded border border-muted shadow-sm text-muted-foreground flex items-center gap-1 group select-none"
 									>
 										<ChefHat
 											class="w-5 h-5 opacity-40 transition-colors group-hover:stroke-blue-500 dark:group-hover:stroke-cyan-300"
