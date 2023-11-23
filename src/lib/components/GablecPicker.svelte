@@ -221,6 +221,8 @@
 				</div>
 				<div class="flex flex-col gap-1 py-4 overflow-y-auto border-t h-72 border-border scrollbar-hide">
 
+					<pre>{$mealSelectionData?.currentUserData?.selected?.[resturant.slug]}</pre>
+
 					{#each meals as { name, price, meta, isCustomItem, hasCustomText, hasTopSeparator }, index (index + 1)}
 						{#if hasTopSeparator}
 							<Separator class="my-2" />
