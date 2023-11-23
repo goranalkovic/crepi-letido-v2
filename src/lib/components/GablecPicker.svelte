@@ -289,6 +289,7 @@
 									<a
 										href={restaurant?.url}
 										class="px-1.5 py-0.5 bg-background rounded border border-muted shadow-sm text-muted-foreground flex items-center gap-1 group select-none"
+										target="_blank"
 									>
 										<ChefHat
 											class="w-5 h-5 opacity-40 transition-colors group-hover:stroke-blue-500 dark:group-hover:stroke-cyan-300"
