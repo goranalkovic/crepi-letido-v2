@@ -60,11 +60,16 @@
 			.channel('restaurantDataSub')
 			.on('postgres_changes', { event: '*', schema: 'public', table: 'meal-selections' }, ({ eventType, new: newRecord }) => {
 				if (eventType === 'INSERT' || eventType === 'UPDATE') {
-					processUserSelections().then((data) =>
+					processUserSelections().then((data) => {
+						console.log({newRecord});
+
+						const curr = get(mealSelectionData);
+
 						set({
 							currentUserData: newRecord,
 							allSelectionData: data,
 						})
+					}
 					);
 				}
 			})
