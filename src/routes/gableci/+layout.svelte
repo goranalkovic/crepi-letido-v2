@@ -256,7 +256,7 @@
 
 		const intersects = Object.entries(refinedUserSelections)
 			.map(([restName, selections]) => {
-				if (selections?.flat()?.length === userData.length) {
+				if ([...new Set(selections?.flat())]?.length === userData.length) {
 					return restName;
 				}
 
