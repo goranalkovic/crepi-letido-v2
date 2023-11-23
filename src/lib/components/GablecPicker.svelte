@@ -131,6 +131,8 @@
 	let tempNoteText = '';
 </script>
 
+{session?.user?.email}
+
 {#if $resturantData?.length < 1}
 	<Alert.Root>
 		<AlertCircle class="w-4 h-4 stroke-red-600 dark:stroke-red-300" />
