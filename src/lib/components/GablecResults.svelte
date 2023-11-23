@@ -83,8 +83,15 @@
 		{#each [...$resturantData]
 			.filter((r) => !$mealSelectionData?.allSelectionData?.selectionData?.[r.restaurant.slug]?.every((sels) => sels?.length === 0))
 			.sort((a, b) => {
-				const aTotal = $mealSelectionData?.allSelectionData?.selectionData?.[a.restaurant.slug].reduce((prev, curr) => prev + (curr?.length ?? 0), 0);
-				const bTotal = $mealSelectionData?.allSelectionData?.selectionData?.[b.restaurant.slug].reduce((prev, curr) => prev + (curr?.length ?? 0), 0);
+				const aData = $mealSelectionData?.allSelectionData?.selectionData?.[a.restaurant.slug];
+				const bData = $mealSelectionData?.allSelectionData?.selectionData?.[b.restaurant.slug];
+
+				if (!aData || !bData) {
+					return 0;
+				}
+
+				const aTotal = aData?.reduce((prev, curr) => prev + (curr?.length ?? 0), 0);
+				const bTotal = bData?.reduce((prev, curr) => prev + (curr?.length ?? 0), 0);
 
 				if (aTotal === bTotal) {
 					return 0;
