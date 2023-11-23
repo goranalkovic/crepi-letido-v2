@@ -110,6 +110,16 @@
 				}
 
 				return 0;
+			}).sort((a, b) => {
+				if (goldenIntersects?.includes(a.restaurant.slug)) {
+					return -1;
+				}
+
+				if (goldenIntersects?.includes(b.restaurant.slug)) {
+					return 1;
+				}
+
+				return 0;
 			}) as { meals, restaurant, id } (id)}
 			<Card.Root class="flex max-lg:flex-col lg:min-h-[14rem]">
 				<Card.Header class="max-lg:border-b lg:border-r lg:w-1/3 border-border lg:justify-between shrink-0">
