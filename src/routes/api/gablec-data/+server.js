@@ -1,5 +1,6 @@
 // @ts-nocheck
-import { json, error } from '@sveltejs/kit';
+import { json } from '@sveltejs/kit';
+import { parse } from 'node-html-parser';
 
 export const GET = async () => {
     // Fetch gableci
