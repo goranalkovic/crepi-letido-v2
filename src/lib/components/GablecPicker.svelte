@@ -223,7 +223,7 @@
 				</div>
 				<div class="flex flex-col gap-1 py-4 overflow-y-auto border-t h-72 border-border scrollbar-hide">
 
-					<pre>{userSelections?.[restaurant.slug]}</pre>
+					<pre>{JSON.stringify(userSelections?.[restaurant.slug])}</pre>
 
 					{#each meals as { name, price, meta, isCustomItem, hasCustomText, hasTopSeparator }, index (index + 1)}
 						{#if hasTopSeparator}
