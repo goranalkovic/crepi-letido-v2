@@ -61,26 +61,19 @@
 			.on('postgres_changes', { event: '*', schema: 'public', table: 'meal-selections' }, ({ eventType, new: newRecord }) => {
 				if (eventType === 'INSERT' || eventType === 'UPDATE') {
 					processUserSelections().then((data) => {
-						console.log({newRecord});
-
-						
-
 						if (newRecord?.user === session?.user?.email) {
 							set({
 								currentUserData: newRecord,
 								allSelectionData: data,
 							})
 						} else {
-							const curr = get(mealSelectionData);
-
-							console.log({curr});
+							const {currentUserData} = get(mealSelectionData);
 
 							set({
-								currentUserData: newRecord,
+								currentUserData: currentUserData,
 								allSelectionData: data,
 							})
 						}
-
 					}
 					);
 				}
