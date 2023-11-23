@@ -2,7 +2,7 @@
 	// @ts-nocheck
 	import { getContext } from 'svelte';
 
-	import { AlertCircle, Phone, Truck, LeafyGreen, CheckCircle, CircleSlash2, CheckCheck } from 'lucide-svelte';
+	import { AlertCircle, Phone, Truck, LeafyGreen, CheckCircle, CircleSlash2, BadgeCheck, CheckCircle2, ChefHat } from 'lucide-svelte';
 	import * as Alert from '$lib/components/ui/alert';
 	import * as AlertDialog from '$lib/components/ui/alert-dialog';
 	import { Button } from '$lib/components/ui/button';
@@ -51,8 +51,8 @@
 		<Button class="mt-12" href="/gableci/pick">Aaaajmo, biraj!</Button>
 	</div>
 {:else if $resturantData?.length > 0}
-	<div class="my-8 text-center">
-		<p class="text-lg font-semibold tracking-tight scroll-m-20 text-muted-foreground">Drugo</p>
+	<div class="mt-8 mb-12 text-center">
+		<p class="text-lg font-semibold tracking-tight scroll-m-20 text-muted-foreground">Ne prvo</p>
 		<h2 class="text-3xl font-semibold tracking-tight transition-colors scroll-m-20">Kaj su drugi zeli?</h2>
 	</div>
 
@@ -73,7 +73,7 @@
 	</Alert.Root> -->
 
 	{#if $mealSelectionData?.currentUserData?.final}
-		<Alert.Root class="max-w-md mx-auto mt-4 border-green-200 bg-gradient-to-br from-green-200/30 to-green-50/0 dark:from-green-200/10 dark:border-green-950">
+		<Alert.Root class="max-w-md mx-auto mt-4 mb-40 border-green-200 bg-gradient-to-br from-green-200/30 to-green-50/0 dark:from-green-200/10 dark:border-green-950">
 			<CheckCircle class="w-4 h-4 stroke-green-500" />
 			<Alert.Title>Odabir finaliziran</Alert.Title>
 			<Alert.Description class="text-muted-foreground">Lepe! Sad pričekaj da i drugi naprave isto.</Alert.Description>
@@ -110,7 +110,8 @@
 				}
 
 				return 0;
-			}).sort((a, b) => {
+			})
+			.sort((a, b) => {
 				if (goldenIntersects?.includes(a.restaurant.slug)) {
 					return -1;
 				}
@@ -121,47 +122,41 @@
 
 				return 0;
 			}) as { meals, restaurant, id } (id)}
-			<Card.Root class="flex max-lg:flex-col lg:min-h-[14rem]">
-				<Card.Header class="max-lg:border-b lg:border-r lg:w-1/3 border-border lg:justify-between shrink-0">
-					<div class="flex items-center gap-3">
-						<div class="p-2 bg-gray-100 border rounded dark:bg-gray-900 border-muted aspect-square">
-							<img class="w-6 aspect-square" src="/restaurant-icons/{restaurant.slug}.png" alt={restaurant?.name} />
+			<Card.Root class="overflow-hidden flex max-md:flex-col md:min-h-[14rem]">
+				<div class="grid grid-cols-1 grid-rows-1 overflow-hidden md:rounded-l-lg max-md:border-b md:w-1/3 border-border md:justify-between shrink-0">
+					<img
+						class="w-48 h-32 col-start-1 col-end-1 row-start-1 row-end-1 duration-1000 scale-150 lg:w-52 dark:md:w-32 max-md:translate-x-8 max-md:translate-y-2 md:justify-self-center md:self-center"
+						src="/restaurant-icons/{restaurant.slug}.png"
+						alt={restaurant?.name}
+					/>
+					<div
+						class="flex flex-col items-center justify-center col-start-1 col-end-1 row-start-1 row-end-1 gap-2 p-2 max-md:py-8 md:rounded-l-lg bg-background/80 backdrop-blur-2xl backdrop-saturate-150 backdrop-brightness-105 dark:backdrop-brightness-125"
+					>
+						<div class="flex items-center self-center justify-center w-12 border rounded shadow-sm aspect-square bg-background/90 border-muted">
+							<img class="w-8 aspect-square" src="/restaurant-icons/{restaurant.slug}.png" alt={restaurant?.name} />
 						</div>
-						<div class="space-y-1 5">
-							<Card.Title>
-								{restaurant.name}
-							</Card.Title>
-						</div>
+						<h2 class="text-lg font-semibold leading-none tracking-tight">
+							{restaurant.name}
+						</h2>
+						{#if restaurant.phone || restaurant.delivery}
+							<div class="flex flex-col items-center justify-center gap-1 mt-3 text-sm text-muted-foreground">
+								{#if restaurant.phone}
+									<div class="px-1.5 py-0.5 bg-background rounded border border-muted shadow-sm text-muted-foreground flex items-center gap-1">
+										<Phone class="w-4 h-4 opacity-40 stroke-[1.5]" />
+										{restaurant.phone}
+									</div>
+								{/if}
 
-						{#if goldenIntersects?.includes(restaurant.slug)}
-							<div class="flex items-center gap-1 p-2 ml-auto font-semibold text-white rounded-lg shadow-inner drop-shadow-md grad-bg-webgradients-122">
-								<CheckCheck class="w-6 h-6" />
-								Intersect+
-							</div>
-						{:else if intersects?.includes(restaurant.slug)}
-							<div class="flex items-center gap-1 p-2 ml-auto font-semibold text-white rounded-lg shadow-inner drop-shadow-md grad-bg-webgradients-136">
-								<CheckCheck class="w-6 h-6" />
-								Intersect
+								{#if restaurant.delivery}
+									<div class="px-1.5 py-0.5 bg-background rounded border border-muted shadow-sm text-muted-foreground flex items-center gap-1 select-none">
+										<Truck class="w-5 h-5 opacity-40 stroke-[1.5]" />
+										{restaurant.delivery}
+									</div>
+								{/if}
 							</div>
 						{/if}
 					</div>
-
-					<Card.Description class="flex items-center gap-2 pt-2 lg:items-start lg:flex-col">
-						{#if restaurant.phone}
-							<div class="px-2 py-0.5 rounded-sm border border-muted text-muted-foreground flex items-center gap-2">
-								<Phone class="w-4 h-4" />
-								{restaurant.phone}
-							</div>
-						{/if}
-
-						{#if restaurant.delivery}
-							<div class="px-2 py-0.5 rounded-sm border border-muted text-muted-foreground flex items-center gap-2">
-								<Truck class="w-4 h-4" />
-								{restaurant.delivery}
-							</div>
-						{/if}
-					</Card.Description>
-				</Card.Header>
+				</div>
 
 				<Card.Content class="w-full pt-6">
 					<div class="flex flex-col gap-1">
@@ -200,7 +195,9 @@
 										{#each $mealSelectionData?.allSelectionData?.selectionData?.[restaurant?.slug]?.[index] ?? [] as em}
 											{#if em}
 												{@const currentUser = $mealSelectionData?.allSelectionData.userData.find(({ email }) => email === em)}
-
+												{@const mealCustomText = $mealSelectionData?.allSelectionData?.userSelections
+													?.find(({ user }) => user === em)
+													?.selected?.[restaurant?.slug]?.find(({ meal }) => meal === index)?.customText}
 												<Tooltip.Root>
 													<Tooltip.Trigger class="transition-[margin]">
 														<Avatar.Root class="w-12 h-12 border-2 border-background">
@@ -213,6 +210,12 @@
 															{currentUser?.firstName}
 															{currentUser?.lastName}
 														</p>
+														{#if mealCustomText?.length > 0}
+															<p class="w-64 mt-2">
+																<span class="font-semibold">Želje i pozdravi</span> <br />
+																<span class="italic">{mealCustomText}</span>
+															</p>
+														{/if}
 													</Tooltip.Content>
 												</Tooltip.Root>
 											{/if}

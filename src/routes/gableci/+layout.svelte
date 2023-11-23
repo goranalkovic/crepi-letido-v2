@@ -1,8 +1,7 @@
 <script>
 	// @ts-nocheck
 	import { setContext } from "svelte";
-	import { readable, get, writable } from "svelte/store";
-	import { parse } from "node-html-parser";
+	import { readable, get } from "svelte/store";
 
 	import { Button } from "$lib/components/ui/button";
 
@@ -19,7 +18,7 @@
 
 	const getGablecData = async () => {
 		// Fetch gableci
-		const url = "https://crepi-letido.eu/api/gablec-data";
+		const url = `${$page.url.origin}/api/gablec-data`;
 
 		const document = await fetch(url);
 		const json = await document.json();
@@ -269,6 +268,7 @@
 			userData,
 			intersects,
 			goldenIntersects,
+			userSelections,
 		};
 	};
 
