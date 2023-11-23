@@ -2,7 +2,7 @@
 	import GablecPicker from '$lib/components/GablecPicker.svelte';
 
 	export let data;
-	$: ({ supabase } = data);
+	$: ({ supabase, session } = data);
 </script>
 
 <svelte:head>
@@ -10,5 +10,5 @@
 	<meta name="description" content="Ima li gladnih?" />
 </svelte:head>
 
-<GablecPicker {supabase} />
+<GablecPicker {supabase} {session} />
 

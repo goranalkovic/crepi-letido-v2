@@ -9,7 +9,6 @@
 	import * as Alert from '$lib/components/ui/alert';
 	import * as AlertDialog from '$lib/components/ui/alert-dialog';
 	import { Button } from '$lib/components/ui/button';
-	import * as Card from '$lib/components/ui/card';
 	import * as Dialog from '$lib/components/ui/dialog';
 	import { Skeleton } from '$lib/components/ui/skeleton';
 	import { Toggle } from '$lib/components/ui/toggle';
@@ -26,6 +25,7 @@
 	const mealSelectionData = getContext('mealSelectionData');
 
 	export let supabase;
+	export let session;
 
 	const date = new Date();
 	const currentYear = date.getFullYear();
@@ -50,7 +50,7 @@
 						[restaurantName]: [{ meal: mealIndex }],
 					},
 				})
-				.eq('id', user.id)
+				.eq('user', session?.user?.email)
 				.gte('created', `${currentDate} 00:00:00`).lte('created', `${currentDate} 23:59:59`);
 			return;
 		}
@@ -80,7 +80,7 @@
 				.update({
 					selected: newSelected,
 				})
-				.eq('id', user.id)
+				.eq('user', session?.user?.email)
 				.gte('created', `${currentDate} 00:00:00`).lte('created', `${currentDate} 23:59:59`);
 		} else {
 			await supabase
@@ -91,7 +91,7 @@
 						[restaurantName]: currentRestaurantMeals,
 					},
 				})
-				.eq('id', user.id)
+				.eq('user', session?.user?.email)
 				.gte('created', `${currentDate} 00:00:00`).lte('created', `${currentDate} 23:59:59`);
 		}
 	};
@@ -110,19 +110,17 @@
 					[restaurantName]: currentRestaurantMeals,
 				},
 			})
-			.eq('id', user.id)
+			.eq('user', session?.user?.email)
 			.gte('created', `${currentDate} 00:00:00`).lte('created', `${currentDate} 23:59:59`);
 	};
 
 	const handlePickFinalize = async () => {
-		const user = get(mealSelectionData).currentUserData;
-
 		await supabase
 			.from('meal-selections')
 			.update({
 				final: true,
 			})
-			.eq('id', user.id)
+			.eq('user', session?.user?.email)
 			.gte('created', `${currentDate} 00:00:00`).lte('created', `${currentDate} 23:59:59`);
 
 		goto('/gableci');
