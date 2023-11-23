@@ -16,6 +16,7 @@
 	const mealSelectionData = getContext('mealSelectionData');
 
 	$: intersects = $mealSelectionData?.allSelectionData?.intersects;
+	$: goldenIntersects = $mealSelectionData?.allSelectionData?.goldenIntersects;
 </script>
 
 {#if $resturantData?.length < 1}
@@ -122,7 +123,12 @@
 							</Card.Title>
 						</div>
 
-						{#if intersects?.includes(restaurant.slug)}
+						{#if goldenIntersects?.includes(restaurant.slug)}
+							<div class="flex items-center gap-1 p-2 ml-auto font-semibold text-white rounded-lg shadow-inner drop-shadow-md grad-bg-webgradients-122">
+								<CheckCheck class="w-6 h-6" />
+								Intersect+
+							</div>
+						{:else if intersects?.includes(restaurant.slug)}
 							<div class="flex items-center gap-1 p-2 ml-auto font-semibold text-white rounded-lg shadow-inner drop-shadow-md grad-bg-webgradients-136">
 								<CheckCheck class="w-6 h-6" />
 								Intersect
