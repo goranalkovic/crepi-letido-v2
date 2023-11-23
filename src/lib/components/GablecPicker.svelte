@@ -285,12 +285,12 @@
 								{/if}
 							</div>
 						{/if}
-						{#if restaurant?.meta?.url?.length > 0 && restaurant?.meta?.urlType === "menu"}
+						{#if restaurant?.url?.length > 0 && restaurant?.urlType === "menu"}
 							<div
 								class="flex justify-center gap-1 mt-3 text-sm text-muted-foreground"
 							>
 								<a
-									href={restaurant?.meta?.url}
+									href={restaurant?.url}
 									class="px-1.5 py-0.5 bg-background rounded border border-muted shadow-sm text-muted-foreground flex items-center gap-1"
 								>
 									<ChefHat class="w-5 h-5 opacity-40" />
