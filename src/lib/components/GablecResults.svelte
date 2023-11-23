@@ -56,7 +56,7 @@
 		<h2 class="text-3xl font-semibold tracking-tight transition-colors scroll-m-20">Kaj su drugi zeli?</h2>
 	</div>
 
-	{#if intersects?.length < 1 && goldenIntersects?.length < 1}
+	{#if intersects?.length < 1 && goldenIntersects?.length < 1 && $mealSelectionData?.allSelectionData?.userData?.length > 1}
 		<Alert.Root class="max-w-md mx-auto border-orange-200 bg-gradient-to-br from-orange-400/10 to-orange-50/0 dark:from-orange-400/10 dark:border-orange-900/50">
 			<CircleSlash2 class="w-4 h-4 stroke-orange-400" />
 			<Alert.Title>Nema intersektija 🥲</Alert.Title>
