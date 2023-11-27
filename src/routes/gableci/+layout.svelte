@@ -107,7 +107,7 @@
 
 		// console.log({initialData});
 
-		if (initialData?.length < allRestaurants?.length) {
+		if (initialData?.length < 1) {
 			const fetchedMappedData = await getGablecData();
 
 			const validRestaurants = fetchedMappedData.filter(
