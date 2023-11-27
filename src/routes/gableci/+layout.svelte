@@ -238,12 +238,12 @@
 			{},
 		);
 
-		const userData = userSelections.map(({ user, userData }) => ({
+		const userData = userSelections.filter(({selected}) => selected && Object.keys(selected)?.length > 0).map(({ user, userData }) => ({
 			...userData,
 			email: user,
 		}));
 
-		const goldenIntersects = Object.entries(refinedUserSelections).filter(([_, selections]) => selections?.flat().length > 0)
+		const goldenIntersects = Object.entries(refinedUserSelections)
 			.map(([restName, selections]) => {
 				if (selections.some((s) => s.length === userData.length)) {
 					return restName;
@@ -253,7 +253,7 @@
 			})
 			.filter(Boolean);
 
-		const intersects = Object.entries(refinedUserSelections).filter(([_, selections]) => selections?.flat().length > 0)
+		const intersects = Object.entries(refinedUserSelections)
 			.map(([restName, selections]) => {
 				if ([...new Set(selections?.flat())]?.length === userData.length) {
 					return restName;
