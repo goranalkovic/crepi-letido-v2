@@ -2,7 +2,7 @@
 	// @ts-nocheck
 	import { getContext } from 'svelte';
 
-	import { AlertCircle, Phone, Truck, LeafyGreen, CheckCircle, CircleSlash2, BadgeCheck, CheckCircle2, ChefHat } from 'lucide-svelte';
+	import { AlertCircle, Phone, Truck, LeafyGreen, CheckCircle, CircleSlash2, BadgeCheck, CheckCircle2, ChefHat, CheckCheck } from 'lucide-svelte';
 	import * as Alert from '$lib/components/ui/alert';
 	import * as AlertDialog from '$lib/components/ui/alert-dialog';
 	import { Button } from '$lib/components/ui/button';
@@ -122,7 +122,18 @@
 
 				return 0;
 			}) as { meals, restaurant, id } (id)}
-			<Card.Root class="overflow-hidden flex max-md:flex-col md:min-h-[14rem]">
+			<Card.Root class="overflow-hidden flex max-md:flex-col md:min-h-[14rem] relative">
+				{#if goldenIntersects?.includes(restaurant.slug)}
+					<div class="flex items-center gap-1 p-2 font-semibold text-white rounded-xl shadow-inner drop-shadow-md grad-bg-webgradients-122 absolute top-4 -left-3">
+						<CheckCheck class="w-6 h-6" />
+						Intersect+
+					</div>
+				{:else if intersects?.includes(restaurant.slug)}
+					<div class="flex items-center gap-1 p-2 font-semibold text-white rounded-xl shadow-inner drop-shadow-md grad-bg-webgradients-136 absolute top-4 -left-3">
+						<CheckCheck class="w-6 h-6" />
+						Intersect
+					</div>
+				{/if}
 				<div class="grid grid-cols-1 grid-rows-1 overflow-hidden md:rounded-l-lg max-md:border-b md:w-1/3 border-border md:justify-between shrink-0">
 					<img
 						class="w-48 h-32 col-start-1 col-end-1 row-start-1 row-end-1 duration-1000 scale-150 lg:w-52 dark:md:w-32 max-md:translate-x-8 max-md:translate-y-2 md:justify-self-center md:self-center"

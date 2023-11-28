@@ -243,8 +243,6 @@
 			email: user,
 		}));
 
-		
-
 		const goldenIntersects = Object.entries(refinedUserSelections)
 			.map(([restName, selections]) => {
 				if (selections.some((s) => s.length === userData.length)) {
