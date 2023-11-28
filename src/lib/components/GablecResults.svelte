@@ -124,12 +124,12 @@
 			}) as { meals, restaurant, id } (id)}
 			<Card.Root class="overflow-hidden flex max-md:flex-col md:min-h-[14rem] relative">
 				{#if goldenIntersects?.includes(restaurant.slug)}
-					<div class="flex items-center gap-1 p-2 font-semibold text-white rounded-xl shadow-inner drop-shadow-md grad-bg-webgradients-122 absolute top-4 -left-3">
+					<div class="flex items-center gap-1 p-2 font-semibold text-white rounded-r-lg shadow-inner drop-shadow-sm grad-bg-webgradients-122 absolute top-4 -left-0 z-20">
 						<CheckCheck class="w-6 h-6" />
 						Intersect+
 					</div>
 				{:else if intersects?.includes(restaurant.slug)}
-					<div class="flex items-center gap-1 p-2 font-semibold text-white rounded-xl shadow-inner drop-shadow-md grad-bg-webgradients-136 absolute top-4 -left-3">
+					<div class="flex items-center gap-1 p-2 font-semibold text-white rounded-r-lg shadow-inner drop-shadow-sm grad-bg-webgradients-136 absolute top-4 -left-0 z-20">
 						<CheckCheck class="w-6 h-6" />
 						Intersect
 					</div>
