@@ -243,6 +243,8 @@
 			email: user,
 		}));
 
+		
+
 		const goldenIntersects = Object.entries(refinedUserSelections)
 			.map(([restName, selections]) => {
 				if (selections.some((s) => s.length === userData.length)) {
@@ -262,6 +264,8 @@
 				return null;
 			})
 			.filter(Boolean);
+
+			console.log({userSelections, userData, l: userData?.length, goldenIntersects, intersects });
 
 		return {
 			selectionData: refinedUserSelections,
