@@ -180,6 +180,39 @@ export const GET = async () => {
 				};
 			}
 
+			if (output.restaurant === 'restoran-fontana-crnkovic') {
+				output = {
+					...output,
+					meals: [
+						...output.meals,
+						{
+							name: 'Pizza capricciosa',
+							price: '5€',
+							hasTopSeparator: true,
+						},
+						{
+							name: 'Svježi sir s vrhnjem',
+							price: '4€',
+						},
+						{
+							name: 'Bistra juha s domaćim krpicama',
+						},
+						{
+							name: 'Salate (kupus kisela, zelena, miješana)',
+							price: '0.80€ - 1€',
+							hasCustomText: true,
+							isCustomItem: true,
+						},
+						{
+							name: 'Dodaci (kečap, majoneza, senf, feferoni, tartar, ...)',
+							price: '0.60€ - 0.80€',
+							hasCustomText: true,
+							isCustomItem: true,
+						},
+					],
+				};
+			}
+
 			if (output.name?.length < 1 || output.slug?.length < 1 || output.meals?.length < 1) {
 				return null;
 			}
