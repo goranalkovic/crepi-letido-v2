@@ -155,6 +155,31 @@ export const GET = async () => {
 							},
 						},
 						{
+							name: 'Grah s kobasicom',
+							price: '5€',
+							meta: {
+								isVegetarian: false,
+								isVegan: false,
+							},
+							hasTopSeparator: true,
+						},
+						{
+							name: 'Fileki',
+							price: '5€',
+							meta: {
+								isVegetarian: false,
+								isVegan: false,
+							},
+						},
+						{
+							name: 'Juneći paprikaš + salata',
+							price: '5.60€',
+							meta: {
+								isVegetarian: false,
+								isVegan: false,
+							},
+						},
+						{
 							name: 'Ideme tamo! (Lignje pa doma™)',
 							hasTopSeparator: true,
 						},
@@ -204,7 +229,7 @@ export const GET = async () => {
 							isCustomItem: true,
 						},
 						{
-							name: 'Dodaci (kečap, majoneza, senf, feferoni, tartar, ...)',
+							name: 'Dodaci (kečap, majoneza, senf, feferoni, tartar)',
 							price: '0.60€ - 0.80€',
 							hasCustomText: true,
 							isCustomItem: true,
