@@ -220,9 +220,6 @@ export const GET = async () => {
 							price: '4€',
 						},
 						{
-							name: 'Bistra juha s domaćim krpicama',
-						},
-						{
 							name: 'Salate (kupus kisela, zelena, miješana)',
 							price: '0.80€ - 1€',
 							hasCustomText: true,
