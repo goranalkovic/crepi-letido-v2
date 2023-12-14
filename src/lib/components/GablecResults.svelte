@@ -171,12 +171,8 @@
 
 				<Card.Content class="w-full pt-6">
 					<div class="flex flex-col gap-1">
-						{#each meals as { name, price, meta, isCustomItem, hasTopSeparator }, index (index + 1)}
+						{#each meals as { name, price, meta, isCustomItem }, index (index + 1)}
 							{#if $mealSelectionData?.allSelectionData?.selectionData?.[restaurant?.slug]?.[index].length > 0}
-								{#if hasTopSeparator}
-									<Separator class="-ml-6 w-[calc(100%_+_3rem)] my-6" />
-								{/if}
-
 								<div class="flex items-center justify-between gap-4 p-4">
 									<div class="grid gap-1.5 leading-none text-start justify-start shrink-0">
 										<span class="inline-flex items-center gap-2 text-sm font-medium">
