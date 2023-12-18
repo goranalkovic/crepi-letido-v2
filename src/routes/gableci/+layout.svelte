@@ -103,6 +103,8 @@
 			.select("id,created,meals,restaurant:restaurants(*)");
 		const { data: customRestaurantData } = await supabase
 			.from("custom-meal-data")
+			.select()
+			.eq("valid", "TRUE")
 			.select("id,created,meals,restaurant:restaurants(*)");
 
 		// console.log({initialData});
