@@ -47,9 +47,16 @@ export const GET = async () => {
 						const isVegetarian = mealData?.classList?.contains('food-type--vegetarijansko');
 						const isVegan = mealData?.classList?.contains('food-type--vegetarijansko');
 
+						let parsedPrice = rawPrice?.innerText?.trim();
+
+						// € only!
+						if (parsedPrice?.includes('(')) {
+							parsedPrice = parsedPrice.slice(parsedPrice, a.indexOf('(')).trim();
+						}
+
 						return {
 							name: mealData.querySelector('.naziv-jela')?.innerText?.trim(),
-							price: rawPrice?.innerText?.trim(),
+							price: parsedPrice,
 							meta: {
 								isVegetarian: isVegetarian,
 								isVegan: isVegan,
