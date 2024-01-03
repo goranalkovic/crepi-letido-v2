@@ -51,7 +51,7 @@ export const GET = async () => {
 
 						// € only!
 						if (parsedPrice?.includes('(')) {
-							parsedPrice = parsedPrice.slice(parsedPrice, a.indexOf('(')).trim();
+							parsedPrice = parsedPrice.slice(0, parsedPrice.indexOf('(')).trim();
 						}
 
 						return {
