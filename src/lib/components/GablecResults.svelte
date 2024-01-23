@@ -138,11 +138,27 @@
 				{/if}
 
 				{#if intersectBreakers?.[restaurant.slug]?.length > 0}
-					<div class="flex items-center gap-1 p-2 font-semibold text-white rounded-r-lg shadow-inner drop-shadow-sm grad-bg-webgradients-136 absolute top-4 -left-0 z-20">
-						<Banana class="w-6 h-6" />
-						Intersect breakeri <br />
-						{JSON.stringify(intersectBreakers[restaurant.slug])}
-					</div>
+					<Alert.Root class="max-w-md mx-auto border-orange-200 bg-gradient-to-br from-orange-400/10 to-orange-50/0 dark:from-orange-400/10 dark:border-orange-900/50">
+						<Banana class="w-4 h-4 stroke-orange-400" />
+						<Alert.Title>Intersekt brejkeri</Alert.Title>
+						<Alert.Description class="text-muted-foreground">
+							{#each intersectBreakers?.[restaurant.slug] as em}
+								{@const currentUser = $mealSelectionData?.allSelectionData.userData.find(({ email }) => email === em)}
+
+								<div class="flex gap-1">
+									<Avatar.Root class="w-12 h-12 border-2 border-background">
+										<Avatar.Image src="/profile-pictures/{currentUser.avatar}.jpg" alt="{currentUser.firstName ?? ''} {currentUser.lastName ?? ''}" />
+										<Avatar.Fallback>{currentUser.firstName?.charAt(0) ?? '-'}{currentUser.lastName?.charAt(0) ?? '-'}</Avatar.Fallback>
+									</Avatar.Root>
+
+									<p>
+										{currentUser?.firstName}
+										{currentUser?.lastName}
+									</p>
+								</div>
+							{/each}
+						</Alert.Description>
+					</Alert.Root>
 				{/if}
 				<div class="grid grid-cols-1 grid-rows-1 overflow-hidden md:rounded-l-lg max-md:border-b md:w-1/3 border-border md:justify-between shrink-0">
 					<img
