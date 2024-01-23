@@ -138,7 +138,7 @@
 				{/if}
 
 				{#if intersectBreakers?.[restaurant.slug]?.length > 0}
-					<Alert.Root class="max-w-md mx-auto border-orange-200 bg-gradient-to-br from-orange-400/10 to-orange-50/0 dark:from-orange-400/10 dark:border-orange-900/50">
+					<Alert.Root class="max-w-md border-orange-200 bg-gradient-to-br from-orange-400/10 to-orange-50/0 dark:from-orange-400/10 dark:border-orange-900/50">
 						<Banana class="w-4 h-4 stroke-orange-400" />
 						<Alert.Title>Intersekt brejkeri</Alert.Title>
 						<Alert.Description class="text-muted-foreground">
