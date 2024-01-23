@@ -283,6 +283,8 @@
 
 		// console.log({userSelections, userData, l: userData?.length, goldenIntersects, intersects });
 
+		console.log({inbt1: intersectBreakers});
+
 		return {
 			selectionData: refinedUserSelections,
 			userData,

@@ -18,7 +18,7 @@
 	$: goldenIntersects = $mealSelectionData?.allSelectionData?.goldenIntersects;
 	$: intersectBreakers = $mealSelectionData?.allSelectionData?.intersectBreakers;
 
-	console.log(intersectBreakers);
+	console.log({intb2: intersectBreakers});
 </script>
 
 {#if $resturantData?.length < 1}
@@ -137,7 +137,7 @@
 					</div>
 				{/if}
 
-				{#if intersectBreakers?.includes(restaurant.slug)}
+				{#if intersectBreakers[restaurant.slug]?.length > 0}
 					<div class="flex items-center gap-1 p-2 font-semibold text-white rounded-r-lg shadow-inner drop-shadow-sm grad-bg-webgradients-136 absolute top-4 -left-0 z-20">
 						<Banana class="w-6 h-6" />
 						Intersect breakeri <br />
