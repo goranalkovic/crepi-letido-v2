@@ -266,7 +266,7 @@
 			.filter(Boolean);
 
 		const intersectBreakers = Object.entries(refinedUserSelections)
-			.map(([restName, selections]) => {
+			.reduce((prev, [restName, selections]) => {
 				if ([...new Set(selections?.flat())]?.length !== userData.length) {
 					console.log({selections, userData});
 
@@ -275,12 +275,11 @@
 
 					const diff = userEmails.filter((item) => !selectionsPeople.includes(item));
 
-					return {restName, diff};
+					return { ...prev, [restName]: diff };
 				}
 
-				return null;
-			})
-			.filter(Boolean);
+				return prev;
+			}, {});
 
 		// console.log({userSelections, userData, l: userData?.length, goldenIntersects, intersects });
 
