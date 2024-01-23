@@ -137,29 +137,6 @@
 					</div>
 				{/if}
 
-				{#if intersectBreakers?.[restaurant.slug]?.length > 0}
-					<Alert.Root class="max-w-md border-orange-200 bg-gradient-to-br from-orange-400/10 to-orange-50/0 dark:from-orange-400/10 dark:border-orange-900/50">
-						<Banana class="w-4 h-4 stroke-orange-400" />
-						<Alert.Title>Intersekt brejkeri</Alert.Title>
-						<Alert.Description class="text-muted-foreground">
-							{#each intersectBreakers?.[restaurant.slug] as em}
-								{@const currentUser = $mealSelectionData?.allSelectionData.userData.find(({ email }) => email === em)}
-
-								<div class="flex gap-1">
-									<Avatar.Root class="w-12 h-12 border-2 border-background">
-										<Avatar.Image src="/profile-pictures/{currentUser.avatar}.jpg" alt="{currentUser.firstName ?? ''} {currentUser.lastName ?? ''}" />
-										<Avatar.Fallback>{currentUser.firstName?.charAt(0) ?? '-'}{currentUser.lastName?.charAt(0) ?? '-'}</Avatar.Fallback>
-									</Avatar.Root>
-
-									<p>
-										{currentUser?.firstName}
-										{currentUser?.lastName}
-									</p>
-								</div>
-							{/each}
-						</Alert.Description>
-					</Alert.Root>
-				{/if}
 				<div class="grid grid-cols-1 grid-rows-1 overflow-hidden md:rounded-l-lg max-md:border-b md:w-1/3 border-border md:justify-between shrink-0">
 					<img
 						class="w-48 h-32 col-start-1 col-end-1 row-start-1 row-end-1 duration-1000 scale-150 lg:w-52 dark:md:w-32 max-md:translate-x-8 max-md:translate-y-2 md:justify-self-center md:self-center"
@@ -258,6 +235,30 @@
 							{/if}
 						{/each}
 					</div>
+
+					{#if intersectBreakers?.[restaurant.slug]?.length > 0}
+						<Alert.Root class="max-w-md border-orange-200 bg-gradient-to-br from-orange-400/10 to-orange-50/0 dark:from-orange-400/10 dark:border-orange-900/50">
+							<Banana class="w-4 h-4 stroke-orange-400" />
+							<Alert.Title>Intersekt brejkeri</Alert.Title>
+							<Alert.Description class="text-muted-foreground">
+								{#each intersectBreakers?.[restaurant.slug] as em}
+									{@const currentUser = $mealSelectionData?.allSelectionData.userData.find(({ email }) => email === em)}
+
+									<div class="flex gap-1 items-center">
+										<Avatar.Root class="w-12 h-12 border-2 border-background">
+											<Avatar.Image src="/profile-pictures/{currentUser.avatar}.jpg" alt="{currentUser.firstName ?? ''} {currentUser.lastName ?? ''}" />
+											<Avatar.Fallback>{currentUser.firstName?.charAt(0) ?? '-'}{currentUser.lastName?.charAt(0) ?? '-'}</Avatar.Fallback>
+										</Avatar.Root>
+
+										<p>
+											{currentUser?.firstName}
+											{currentUser?.lastName}
+										</p>
+									</div>
+								{/each}
+							</Alert.Description>
+						</Alert.Root>
+					{/if}
 				</Card.Content>
 			</Card.Root>
 		{/each}
