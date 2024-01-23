@@ -265,7 +265,17 @@
 			})
 			.filter(Boolean);
 
-			console.log({userSelections, userData, l: userData?.length, goldenIntersects, intersects });
+		const intersectBreakers = Object.entries(refinedUserSelections)
+			.map(([restName, selections]) => {
+				if ([...new Set(selections?.flat())]?.length !== userData.length) {
+					console.log({selections, userData});
+				}
+
+				return null;
+			})
+			.filter(Boolean);
+
+		// console.log({userSelections, userData, l: userData?.length, goldenIntersects, intersects });
 
 		return {
 			selectionData: refinedUserSelections,
