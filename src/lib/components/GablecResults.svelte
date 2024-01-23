@@ -2,13 +2,12 @@
 	// @ts-nocheck
 	import { getContext } from 'svelte';
 
-	import { AlertCircle, Phone, Truck, LeafyGreen, CheckCircle, CircleSlash2, BadgeCheck, CheckCircle2, ChefHat, CheckCheck } from 'lucide-svelte';
+	import { AlertCircle, Phone, Truck, LeafyGreen, CheckCircle, CircleSlash2, Banana, CheckCheck } from 'lucide-svelte';
 	import * as Alert from '$lib/components/ui/alert';
 	import * as AlertDialog from '$lib/components/ui/alert-dialog';
 	import { Button } from '$lib/components/ui/button';
 	import * as Card from '$lib/components/ui/card';
 	import { Skeleton } from '$lib/components/ui/skeleton';
-	import { Separator } from '$lib/components/ui/separator';
 	import * as Tooltip from '$lib/components/ui/tooltip';
 	import * as Avatar from '$lib/components/ui/avatar';
 
@@ -17,6 +16,7 @@
 
 	$: intersects = $mealSelectionData?.allSelectionData?.intersects;
 	$: goldenIntersects = $mealSelectionData?.allSelectionData?.goldenIntersects;
+	$: intersectBreakers = $mealSelectionData?.allSelectionData?.intersectBreakers;
 </script>
 
 {#if $resturantData?.length < 1}
@@ -132,6 +132,14 @@
 					<div class="flex items-center gap-1 p-2 font-semibold text-white rounded-r-lg shadow-inner drop-shadow-sm grad-bg-webgradients-136 absolute top-4 -left-0 z-20">
 						<CheckCheck class="w-6 h-6" />
 						Intersect
+					</div>
+				{/if}
+
+				{#if intersectBreakers?.includes(restaurant.slug)}
+					<div class="flex items-center gap-1 p-2 font-semibold text-white rounded-r-lg shadow-inner drop-shadow-sm grad-bg-webgradients-136 absolute top-4 -left-0 z-20">
+						<Banana class="w-6 h-6" />
+						Intersect breakeri <br />
+						{JSON.stringify(intersectBreakers[restaurant.slug])}
 					</div>
 				{/if}
 				<div class="grid grid-cols-1 grid-rows-1 overflow-hidden md:rounded-l-lg max-md:border-b md:w-1/3 border-border md:justify-between shrink-0">

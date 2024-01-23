@@ -282,8 +282,6 @@
 			})
 			.filter(Boolean);
 
-		console.log({intersectBreakers});
-
 		// console.log({userSelections, userData, l: userData?.length, goldenIntersects, intersects });
 
 		return {
@@ -292,6 +290,7 @@
 			intersects,
 			goldenIntersects,
 			userSelections,
+			intersectBreakers,
 		};
 	};
 
