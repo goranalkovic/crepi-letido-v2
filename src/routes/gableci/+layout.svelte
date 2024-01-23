@@ -269,6 +269,13 @@
 			.map(([restName, selections]) => {
 				if ([...new Set(selections?.flat())]?.length !== userData.length) {
 					console.log({selections, userData});
+
+					const selectionsPeople = [...new Set(selections?.flat())];
+					const userEmails = userData.map(({email}) => email);
+
+					const diff = userEmails.filter((item) => !selectionsPeople.includes(item));
+
+					return {restName, diff};
 				}
 
 				return null;
