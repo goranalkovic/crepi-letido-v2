@@ -240,20 +240,20 @@
 						<Alert.Root class="max-w-md border-orange-200 bg-gradient-to-br from-orange-400/10 to-orange-50/0 dark:from-orange-400/10 dark:border-orange-900/50">
 							<Banana class="w-4 h-4 stroke-orange-400" />
 							<Alert.Title>Intersekt brejkeri</Alert.Title>
-							<Alert.Description class="text-muted-foreground">
+							<Alert.Description class="mt-2">
 								{#each intersectBreakers?.[restaurant.slug] as em}
 									{@const currentUser = $mealSelectionData?.allSelectionData.userData.find(({ email }) => email === em)}
 
 									<div class="flex gap-1 items-center">
-										<Avatar.Root class="w-12 h-12 border-2 border-background">
+										<Avatar.Root class="w-8 h-8 border border-background">
 											<Avatar.Image src="/profile-pictures/{currentUser.avatar}.jpg" alt="{currentUser.firstName ?? ''} {currentUser.lastName ?? ''}" />
 											<Avatar.Fallback>{currentUser.firstName?.charAt(0) ?? '-'}{currentUser.lastName?.charAt(0) ?? '-'}</Avatar.Fallback>
 										</Avatar.Root>
 
-										<p>
+										<span>
 											{currentUser?.firstName}
 											{currentUser?.lastName}
-										</p>
+										</span>
 									</div>
 								{/each}
 							</Alert.Description>
