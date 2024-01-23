@@ -17,6 +17,8 @@
 	$: intersects = $mealSelectionData?.allSelectionData?.intersects;
 	$: goldenIntersects = $mealSelectionData?.allSelectionData?.goldenIntersects;
 	$: intersectBreakers = $mealSelectionData?.allSelectionData?.intersectBreakers;
+
+	console.log(intersectBreakers);
 </script>
 
 {#if $resturantData?.length < 1}
