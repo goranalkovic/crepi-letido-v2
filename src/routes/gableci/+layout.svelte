@@ -117,14 +117,14 @@
 					allRestaurants.find(({ slug }) => slug === restaurant),
 			);
 
-			console.log({ validRestaurants, fetchedMappedData });
+			// console.log({ validRestaurants, fetchedMappedData });
 
 			if (validRestaurants.length < fetchedMappedData.length) {
 				const invalidRestaurants = fetchedMappedData.filter(
 					(item) => !validRestaurants.includes(item),
 				);
 
-				console.error({ invalidRestaurants });
+				console.log({ invalidRestaurants });
 			}
 
 			if (insert) {
