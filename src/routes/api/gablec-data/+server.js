@@ -242,6 +242,19 @@ export const GET = async () => {
 				};
 			}
 
+			if (output.restaurant === 'restoran-zvonimir') {
+				output = {
+					...output,
+					meals: [
+						...output.meals,
+						{
+							name: 'Nekaj z dnevnog menija',
+							hasCustomText: true,
+						},
+					],
+				};
+			}
+
 			if (output.name?.length < 1 || output.slug?.length < 1 || output.meals?.length < 1) {
 				return null;
 			}
