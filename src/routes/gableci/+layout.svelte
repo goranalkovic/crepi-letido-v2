@@ -135,14 +135,14 @@
 					.select();
 
 				if (Array.isArray(newRecords)) {
-					return new Set([...newRecords, ...customRestaurantData]);
+					return Array.from(new Set([...newRecords, ...customRestaurantData]));
 				}
 			} else {
-				return new Set([...fetchedMappedData, ...customRestaurantData]);
+				return Array.from(new Set([...fetchedMappedData, ...customRestaurantData]));
 			}
 		}
 
-		return new Set([...initialData, ...customRestaurantData]);
+		return Array.from(new Set([...initialData, ...customRestaurantData]));
 	};
 
 	const resturantData = readable(null, (set) => {
