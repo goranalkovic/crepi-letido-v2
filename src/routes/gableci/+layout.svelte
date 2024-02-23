@@ -124,21 +124,27 @@
 					(item) => !validRestaurants.includes(item),
 				);
 
-				console.error('Found restaurants that do\'nt exist in the database!');
-				console.error({ invalidRestaurants });
+				console.error(
+					"Found restaurants that don't exist in the database!",
+					{ invalidRestaurants },
+				);
 			}
 
 			if (insert) {
 				const { data: newRecords } = await supabase
-					.from('meal-data')
+					.from("meal-data")
 					.insert(validRestaurants)
 					.select();
 
 				if (Array.isArray(newRecords)) {
-					return Array.from(new Set([...newRecords, ...customRestaurantData]));
+					return Array.from(
+						new Set([...newRecords, ...customRestaurantData]),
+					);
 				}
 			} else {
-				return Array.from(new Set([...fetchedMappedData, ...customRestaurantData]));
+				return Array.from(
+					new Set([...fetchedMappedData, ...customRestaurantData]),
+				);
 			}
 		}
 
@@ -241,10 +247,14 @@
 			{},
 		);
 
-		const userData = userSelections.filter(({selected}) => selected && Object.keys(selected)?.length > 0).map(({ user, userData }) => ({
-			...userData,
-			email: user,
-		}));
+		const userData = userSelections
+			.filter(
+				({ selected }) => selected && Object.keys(selected)?.length > 0,
+			)
+			.map(({ user, userData }) => ({
+				...userData,
+				email: user,
+			}));
 
 		const goldenIntersects = Object.entries(refinedUserSelections)
 			.map(([restName, selections]) => {
@@ -258,7 +268,9 @@
 
 		const intersects = Object.entries(refinedUserSelections)
 			.map(([restName, selections]) => {
-				if ([...new Set(selections?.flat())]?.length === userData.length) {
+				if (
+					[...new Set(selections?.flat())]?.length === userData.length
+				) {
 					return restName;
 				}
 
@@ -266,25 +278,31 @@
 			})
 			.filter(Boolean);
 
-		const intersectBreakers = Object.entries(refinedUserSelections)
-			.reduce((prev, [restName, selections]) => {
-				if ([...new Set(selections?.flat())]?.length !== userData.length) {
-					console.log({selections, userData});
+		const intersectBreakers = Object.entries(refinedUserSelections).reduce(
+			(prev, [restName, selections]) => {
+				if (
+					[...new Set(selections?.flat())]?.length !== userData.length
+				) {
+					console.log({ selections, userData });
 
 					const selectionsPeople = [...new Set(selections?.flat())];
-					const userEmails = userData.map(({email}) => email);
+					const userEmails = userData.map(({ email }) => email);
 
-					const diff = userEmails.filter((item) => !selectionsPeople.includes(item));
+					const diff = userEmails.filter(
+						(item) => !selectionsPeople.includes(item),
+					);
 
 					return { ...prev, [restName]: diff };
 				}
 
 				return prev;
-			}, {});
+			},
+			{},
+		);
 
 		// console.log({userSelections, userData, l: userData?.length, goldenIntersects, intersects });
 
-		console.log({inbt1: intersectBreakers});
+		console.log({ inbt1: intersectBreakers });
 
 		return {
 			selectionData: refinedUserSelections,
