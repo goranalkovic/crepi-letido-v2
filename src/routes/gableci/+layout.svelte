@@ -110,7 +110,8 @@
 		// console.log({initialData});
 
 		if (initialData?.length < 1) {
-			const fetchedMappedData = await getGablecData();
+			let fetchedMappedData = await getGablecData();
+			let invalidRestaurantSlugs = [];
 
 			const validRestaurants = fetchedMappedData.filter(
 				({ restaurant }) =>
@@ -124,12 +125,21 @@
 					(item) => !validRestaurants.includes(item),
 				);
 
+				invalidRestaurantSlugs = invalidRestaurants.map(({ restaurant }) => restaurant);
+
 				console.log({ invalidRestaurants });
 			}
 
+			fetchedMappedData = fetchedMappedData.map((item) => (
+				{
+					...item,
+					valid: !invalidRestaurantSlugs.includes(item.slug),
+				}
+			));
+
 			if (insert) {
 				const { data: newRecords } = await supabase
-					.from("meal-data")
+					.from('meal-data')
 					.insert(fetchedMappedData)
 					.select();
 
