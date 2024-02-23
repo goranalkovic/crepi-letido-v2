@@ -110,8 +110,7 @@
 		// console.log({initialData});
 
 		if (initialData?.length < 1) {
-			let fetchedMappedData = await getGablecData();
-			let invalidRestaurantSlugs = [];
+			const fetchedMappedData = await getGablecData();
 
 			const validRestaurants = fetchedMappedData.filter(
 				({ restaurant }) =>
@@ -125,22 +124,14 @@
 					(item) => !validRestaurants.includes(item),
 				);
 
-				invalidRestaurantSlugs = invalidRestaurants.map(({ restaurant }) => restaurant);
-
-				console.log({ invalidRestaurants });
+				console.error('Found restaurants that do\'nt exist in the database!');
+				console.error({ invalidRestaurants });
 			}
-
-			fetchedMappedData = fetchedMappedData.map((item) => (
-				{
-					...item,
-					valid: !invalidRestaurantSlugs.includes(item.slug),
-				}
-			));
 
 			if (insert) {
 				const { data: newRecords } = await supabase
 					.from('meal-data')
-					.insert(fetchedMappedData)
+					.insert(validRestaurants)
 					.select();
 
 				if (Array.isArray(newRecords)) {
