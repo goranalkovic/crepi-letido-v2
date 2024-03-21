@@ -123,6 +123,16 @@
 				}
 
 				return 0;
+			}).sort((a, b) => {
+				if (intersectBreakers?.[a.restaurant.slug]?.length >  0 && intersectBreakers?.[b.restaurant.slug]?.length > 0) {
+					if (intersectBreakers?.[a.restaurant.slug]?.length === intersectBreakers?.[b.restaurant.slug]?.length) {
+						return 0;
+					}
+
+					return intersectBreakers?.[a.restaurant.slug]?.length > intersectBreakers?.[b.restaurant.slug]?.length;
+				}
+
+				return 0;
 			}) as { meals, restaurant, id } (id)}
 			<Card.Root class="overflow-hidden flex max-md:flex-col md:min-h-[14rem] relative">
 				{#if goldenIntersects?.includes(restaurant.slug)}
