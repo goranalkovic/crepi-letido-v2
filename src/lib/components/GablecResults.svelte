@@ -103,6 +103,13 @@
 				return aTotal > bTotal ? -1 : 1;
 			})
 			.sort((a, b) => {
+				if (intersectBreakers?.[a.restaurant.slug]?.length === intersectBreakers?.[b.restaurant.slug]?.length) {
+					return 0;
+				}
+
+				return intersectBreakers?.[a.restaurant.slug]?.length > intersectBreakers?.[b.restaurant.slug]?.length;
+			})
+			.sort((a, b) => {
 				if (intersects?.includes(a.restaurant.slug)) {
 					return -1;
 				}
@@ -120,16 +127,6 @@
 
 				if (goldenIntersects?.includes(b.restaurant.slug)) {
 					return 1;
-				}
-
-				return 0;
-			}).sort((a, b) => {
-				if (intersectBreakers?.[a.restaurant.slug]?.length >  0 && intersectBreakers?.[b.restaurant.slug]?.length > 0) {
-					if (intersectBreakers?.[a.restaurant.slug]?.length === intersectBreakers?.[b.restaurant.slug]?.length) {
-						return 0;
-					}
-
-					return intersectBreakers?.[a.restaurant.slug]?.length > intersectBreakers?.[b.restaurant.slug]?.length;
 				}
 
 				return 0;
