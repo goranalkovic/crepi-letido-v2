@@ -107,7 +107,11 @@
 					return 0;
 				}
 
-				return intersectBreakers?.[a.restaurant.slug]?.length > intersectBreakers?.[b.restaurant.slug]?.length;
+				if (intersectBreakers?.[a.restaurant.slug]?.length > intersectBreakers?.[b.restaurant.slug]?.length) {
+					return -1;
+				};
+
+				return 1;
 			})
 			.sort((a, b) => {
 				if (intersects?.includes(a.restaurant.slug)) {
